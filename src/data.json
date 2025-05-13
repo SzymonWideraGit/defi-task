@@ -1,0 +1,28 @@
+[
+    {
+      "name": "Solana (SOL)",
+      "id": "sol",
+      "price": 200.00
+    },
+    {
+      "name": "Bitcoin (BTC)",
+      "id": "btc",
+      "price": 93200.00
+    },
+    {
+      "name": "Ethereum (ETH)",
+      "id": "eth",
+      "price": 3200.0
+    },
+    {
+      "name": "Polygon (POL)",
+      "id": "pol",
+      "price": 0.52
+    },
+    {
+      "name": "Polkadot (DOT)",
+      "id": "dot",
+      "price": 7.20
+    }
+]
+  
