@@ -1,14 +1,15 @@
-import { FC, ReactNode } from 'react';
+import { forwardRef, ReactNode } from 'react';
 import { ScrollbarProps, Scrollbars } from 'react-custom-scrollbars-2';
 
 interface IProps extends ScrollbarProps {
     children: ReactNode;
     disabled?: boolean;
-}
+};
 
-export const CustomScrollBar:FC<IProps> = (props) => {
+export const CustomScrollBar = forwardRef<Scrollbars, IProps>((props, ref) => {
     return (
         <Scrollbars
+            ref={ref}
             renderThumbVertical={({ style, ...props }) => (
                 <div
                     {...props}
@@ -23,5 +24,5 @@ export const CustomScrollBar:FC<IProps> = (props) => {
         {props.children}
         </Scrollbars>
     );
-};
+});
 

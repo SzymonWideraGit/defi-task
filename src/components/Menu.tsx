@@ -5,25 +5,22 @@ import { colors } from "../styleHelpers/colors";
 import { fontSizeAndHeight } from "../styleHelpers/fontsSize";
 import AttachMoneyIcon from '@mui/icons-material/AttachMoney';
 import FavoriteIcon from '@mui/icons-material/Favorite';
-
-const Wrapper = styled.div`
-    background: linear-gradient(90deg, ${colors.darkGrey} 15%, ${colors.grey} 100%);
-    width: 25%;
-    border-right: 1px solid #332E2E;
-`;
+import { Box } from "@mui/material";
+import { useWalletValue } from "../hooks/useWalletValue";
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 const HyperLink = styled(NavLink)`
     width: 100%;
     color: ${colors.white};
     font-weight: 700;
-    ${fontSizeAndHeight[16]}
+    ${fontSizeAndHeight[16]};
     &.active {
         > div {
             background: linear-gradient(90deg, ${colors.middleGrey} 40%, ${colors.lightGrey} 100%);
             color: ${colors.black}
-        }
-    }
-`
+        };
+    };
+`;
 
 const ContentBox = styled.div`
     display: flex;
@@ -32,14 +29,23 @@ const ContentBox = styled.div`
     width: 100%;
     align-items: center;
     padding-left: 16px;
-`
+`;
 
 export const Menu:FC = () => {
     return (
-        <Wrapper>
+        <Box sx={{background: `linear-gradient(90deg, ${colors.darkGrey} 0%, ${colors.grey} 100%)`,
+            borderRight: `1px solid ${colors.darkGrey}`,
+            width: {sm: '25%', xs: '100%'}
+        }}>
+            <Box sx={{display: {sm: 'none', xs: 'block'}, color: `${colors.white}`}}>
+                <ContentBox>
+                    <AccountBalanceWalletIcon />
+                    <span>My wallet USD value: ${useWalletValue()}</span>
+                </ContentBox>
+            </Box>
             <HyperLink to={'/'}>
                 <ContentBox>
-                    <AttachMoneyIcon/>
+                    <AttachMoneyIcon />
                     <span>Pick Favourites</span>
                 </ContentBox>
             </HyperLink>
@@ -49,7 +55,7 @@ export const Menu:FC = () => {
                     <span>My cryptocurrencies</span>
                 </ContentBox>
             </HyperLink>
-        </Wrapper>
+        </Box>
     )
 }
 

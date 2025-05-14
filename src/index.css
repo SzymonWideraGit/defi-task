@@ -19,6 +19,12 @@ a {
     text-decoration: none;
 }
 
+button {
+    all: unset;
+    cursor: pointer;
+    text-align: center;
+}
+
 code {
   font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
     monospace;

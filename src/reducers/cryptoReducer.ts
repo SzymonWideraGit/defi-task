@@ -6,12 +6,12 @@ interface IMyCryptoDetails {
     amount: string;
     unit: string;
     id: string;
-}
+};
 
 interface ICryptoItem extends IMyCryptoDetails {
     price: number;
     isFavourite: boolean;
-    updated: Date;
+    updated: string;
     name: string;
 };
 
@@ -23,7 +23,7 @@ const initialState: ICryptoItem[] = data.map(elem => ({
     comment: '',
     name: '',
     isFavourite: false,
-    updated: new Date
+    updated: new Date().toISOString()
 }));
 
 const cryptoSlice = createSlice({
@@ -36,7 +36,7 @@ const cryptoSlice = createSlice({
         updatePrices(state) {
             state.forEach((item) => {
                 item.price += 1;
-                item.updated = new Date
+                item.updated = new Date().toISOString()
             });
             localStorage.setItem('cryptoCurrencies', JSON.stringify(state));
         },

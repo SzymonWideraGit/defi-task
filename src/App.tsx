@@ -2,7 +2,7 @@
 import { RouterProvider } from 'react-router';
 import router from './routes';
 import { useEffect } from 'react';
-import { useAppDispatch } from './hooks/hooks';
+import { useAppDispatch } from './hooks/reduxHooks';
 import { setInitialCryptoData, updatePrices } from './reducers/cryptoReducer';
 
 function App() {
@@ -20,13 +20,9 @@ function App() {
         return () => clearInterval(interval);
     }, [])
 
-    useEffect(() => {
-
-    }, []);
     return (
         <RouterProvider router={router} />
     );
 }
-
 
 export default App;

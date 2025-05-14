@@ -1,11 +1,10 @@
 import React, { FC, useRef, useState, useEffect, useMemo } from "react";
 import styled, { css } from "styled-components";
-import { fontSizeAndHeight } from "../styleHelpers/fontsSize";
 import { colors } from "../styleHelpers/colors";
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
 import { SingleFavouriteCard } from "./common/SingleFavouriteCard";
-import { useAppSelector } from "../hooks/hooks";
+import { useAppSelector } from "../hooks/reduxHooks";
 import Typography from "@mui/material/Typography";
 
 const CarouselWrapper = styled.div`
@@ -31,17 +30,10 @@ const SlideContainer = styled.div<{ cardMargin: number }>`
     overflow: hidden;
 `;
 
-const Title = styled(Typography)(({ theme }) => ({
+const Title = styled(Typography)({
     color: colors.white,
-    marginTop: 38,
-    marginBottom: '5%',
     textAlign: 'center',
-
-    fontSize: "87px !important",
-    [theme.breakpoints.down('xs')]: {
-        fontSize: "39px !important",
-    },
-}));
+});
 
 const ButtonsContainer = styled.div`
     display: flex;
@@ -50,7 +42,7 @@ const ButtonsContainer = styled.div`
     color: ${colors.white};
 `;
 
-export const Favourites: FC = (props) => {
+export const Favourites: FC = () => {
     const data = useAppSelector(state => state.cryptoData);
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const [slideWidth, setSlideWidth] = useState<number>(0);
@@ -61,7 +53,7 @@ export const Favourites: FC = (props) => {
     const [touchEndX, setTouchEndX] = useState<number | null>(null);
     const cardMargin = 12;
     const offsetToCenter = slideWidth * currentIndex - (containerWidth - slideWidth) / 2;
-    const favouriteData = useMemo(() => data.filter(elem => elem.isFavourite), [data])
+    const favouriteData = useMemo(() => data.filter(elem => elem.isFavourite), [data]);
 
     useEffect(() => {
         const updateSizes = () => {
@@ -118,7 +110,7 @@ export const Favourites: FC = (props) => {
         >
             {favouriteData?.length > 0 ? (
                 <>
-                    <Title>My cryptocurrencies</Title>
+                    <Title sx={{fontSize: {sm: "87px", xs: "39px"}, marginBottom: "20px", marginTop: "10px"}}>My cryptocurrencies</Title>
                     <CarouselTrack translateX={offsetToCenter}>
                         {favouriteData?.map((elem, index) => 
                             <SlideContainer
@@ -138,7 +130,7 @@ export const Favourites: FC = (props) => {
                         <ArrowForwardIcon sx={{minWidth: "64px", height: "auto"}} onClick={handleNext} />
                     </ButtonsContainer>
                 </>
-            ) : <Title>You dont have favourite cryptos</Title>}
+            ) : <Title sx={{fontSize: {sm: "87px", xs: "39px"}, marginBottom: "20px", marginTop: "10px"}}>You dont have favourite cryptos</Title>}
         </CarouselWrapper>
     );
 };
